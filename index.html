@@ -1,0 +1,730 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jonathan Reding — IT Leader & Technical Project Manager</title>
+  <meta name="description" content="Jonathan Reding — IT Director and Technical Project Manager based in Colorado Springs. Specializing in IT infrastructure, AV/media technology, and digital transformation.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=IBM+Plex+Sans:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --stone-50: #fafaf9;
+      --stone-100: #f5f5f4;
+      --stone-200: #e7e5e4;
+      --stone-300: #d6d3d1;
+      --stone-400: #a8a29e;
+      --stone-500: #78716c;
+      --stone-600: #57534e;
+      --stone-700: #44403c;
+      --stone-800: #292524;
+      --stone-900: #1c1917;
+      --accent: #2563eb;
+      --accent-light: #3b82f6;
+      --accent-subtle: #eff6ff;
+      --serif: 'DM Serif Display', Georgia, serif;
+      --sans: 'IBM Plex Sans', -apple-system, sans-serif;
+      --mono: 'IBM Plex Mono', monospace;
+    }
+
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--sans);
+      color: var(--stone-800);
+      background: var(--stone-50);
+      line-height: 1.7;
+      font-weight: 400;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      background: rgba(250, 250, 249, 0.85);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--stone-200);
+      transition: box-shadow 0.3s;
+    }
+    nav.scrolled { box-shadow: 0 1px 12px rgba(0,0,0,0.06); }
+    .nav-inner {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 0 2rem;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .nav-name {
+      font-family: var(--mono);
+      font-weight: 500;
+      font-size: 0.9rem;
+      letter-spacing: -0.02em;
+      color: var(--stone-800);
+      text-decoration: none;
+    }
+    .nav-links { display: flex; gap: 2rem; }
+    .nav-links a {
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: var(--stone-500);
+      text-decoration: none;
+      letter-spacing: 0.01em;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--stone-800); }
+    .hamburger {
+      display: none;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 4px;
+    }
+    .hamburger span {
+      display: block;
+      width: 22px;
+      height: 2px;
+      background: var(--stone-700);
+      margin: 5px 0;
+      border-radius: 2px;
+      transition: all 0.3s;
+    }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding: 64px 2rem 0;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -200px;
+      right: -200px;
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, rgba(37, 99, 235, 0.06) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero-inner {
+      max-width: 1120px;
+      margin: 0 auto;
+      width: 100%;
+    }
+    .hero-label {
+      font-family: var(--mono);
+      font-size: 0.8rem;
+      font-weight: 400;
+      color: var(--accent);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      margin-bottom: 1.5rem;
+      opacity: 0;
+      animation: fadeUp 0.8s ease forwards 0.2s;
+    }
+    .hero h1 {
+      font-family: var(--serif);
+      font-size: clamp(2.8rem, 6vw, 4.5rem);
+      font-weight: 400;
+      line-height: 1.1;
+      color: var(--stone-900);
+      margin-bottom: 1.5rem;
+      opacity: 0;
+      animation: fadeUp 0.8s ease forwards 0.4s;
+    }
+    .hero-subtitle {
+      font-size: 1.15rem;
+      font-weight: 300;
+      color: var(--stone-500);
+      max-width: 560px;
+      line-height: 1.8;
+      margin-bottom: 2.5rem;
+      opacity: 0;
+      animation: fadeUp 0.8s ease forwards 0.6s;
+    }
+    .hero-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-family: var(--mono);
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: var(--accent);
+      text-decoration: none;
+      padding: 0.7rem 1.6rem;
+      border: 1.5px solid var(--accent);
+      border-radius: 6px;
+      transition: all 0.25s;
+      opacity: 0;
+      animation: fadeUp 0.8s ease forwards 0.8s;
+    }
+    .hero-cta:hover {
+      background: var(--accent);
+      color: #fff;
+    }
+    .hero-cta svg { transition: transform 0.25s; }
+    .hero-cta:hover svg { transform: translateX(3px); }
+
+    /* ── SECTIONS ── */
+    section {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 6rem 2rem;
+    }
+    .section-label {
+      font-family: var(--mono);
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.75rem;
+    }
+    .section-title {
+      font-family: var(--serif);
+      font-size: clamp(1.8rem, 3.5vw, 2.4rem);
+      font-weight: 400;
+      color: var(--stone-900);
+      margin-bottom: 2rem;
+    }
+    .divider {
+      width: 48px;
+      height: 2px;
+      background: var(--accent);
+      margin-bottom: 3rem;
+      border-radius: 1px;
+    }
+
+    /* ── ABOUT ── */
+    #about { border-top: 1px solid var(--stone-200); }
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: start;
+    }
+    .about-text p {
+      color: var(--stone-600);
+      margin-bottom: 1.25rem;
+      font-size: 1.02rem;
+    }
+    .about-details {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+    }
+    .detail-card {
+      background: #fff;
+      border: 1px solid var(--stone-200);
+      border-radius: 8px;
+      padding: 1.25rem 1.5rem;
+    }
+    .detail-card .label {
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--stone-400);
+      margin-bottom: 0.4rem;
+    }
+    .detail-card .value {
+      font-size: 0.95rem;
+      font-weight: 500;
+      color: var(--stone-800);
+    }
+
+    /* ── EXPERIENCE ── */
+    .exp-item {
+      display: grid;
+      grid-template-columns: 200px 1fr;
+      gap: 3rem;
+      padding: 2.5rem 0;
+      border-bottom: 1px solid var(--stone-200);
+    }
+    .exp-item:last-child { border-bottom: none; }
+    .exp-period {
+      font-family: var(--mono);
+      font-size: 0.82rem;
+      color: var(--stone-400);
+      padding-top: 0.3rem;
+    }
+    .exp-role {
+      font-family: var(--serif);
+      font-size: 1.35rem;
+      color: var(--stone-900);
+      margin-bottom: 0.3rem;
+    }
+    .exp-org {
+      font-size: 0.95rem;
+      font-weight: 500;
+      color: var(--accent);
+      margin-bottom: 1rem;
+    }
+    .exp-desc {
+      color: var(--stone-600);
+      font-size: 0.95rem;
+      line-height: 1.8;
+    }
+    .exp-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 1rem;
+    }
+    .exp-tag {
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      font-weight: 400;
+      color: var(--stone-500);
+      background: var(--stone-100);
+      padding: 0.3rem 0.75rem;
+      border-radius: 4px;
+    }
+
+    /* ── SKILLS ── */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+    .skill-card {
+      background: #fff;
+      border: 1px solid var(--stone-200);
+      border-radius: 8px;
+      padding: 2rem;
+      transition: border-color 0.25s, box-shadow 0.25s;
+    }
+    .skill-card:hover {
+      border-color: var(--stone-300);
+      box-shadow: 0 4px 20px rgba(0,0,0,0.04);
+    }
+    .skill-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 8px;
+      background: var(--accent-subtle);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1.25rem;
+      color: var(--accent);
+    }
+    .skill-card h3 {
+      font-family: var(--sans);
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--stone-800);
+      margin-bottom: 0.6rem;
+    }
+    .skill-card p {
+      font-size: 0.88rem;
+      color: var(--stone-500);
+      line-height: 1.7;
+    }
+
+    /* ── CERTIFICATIONS ── */
+    .certs-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+    .cert-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      background: #fff;
+      border: 1px solid var(--stone-200);
+      border-radius: 6px;
+      padding: 0.65rem 1.2rem;
+      font-size: 0.88rem;
+      font-weight: 500;
+      color: var(--stone-700);
+    }
+    .cert-badge .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--accent);
+    }
+
+    /* ── EDUCATION ── */
+    .edu-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+      margin-top: 1rem;
+    }
+    .edu-card {
+      background: #fff;
+      border: 1px solid var(--stone-200);
+      border-radius: 8px;
+      padding: 1.75rem 2rem;
+    }
+    .edu-degree {
+      font-family: var(--serif);
+      font-size: 1.1rem;
+      color: var(--stone-900);
+      margin-bottom: 0.3rem;
+    }
+    .edu-school {
+      font-size: 0.9rem;
+      color: var(--accent);
+      font-weight: 500;
+      margin-bottom: 0.3rem;
+    }
+    .edu-field {
+      font-size: 0.88rem;
+      color: var(--stone-500);
+    }
+
+    /* ── CONTACT ── */
+    #contact {
+      border-top: 1px solid var(--stone-200);
+    }
+    .contact-content {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: start;
+    }
+    .contact-text p {
+      color: var(--stone-600);
+      font-size: 1.02rem;
+      margin-bottom: 1.5rem;
+    }
+    .contact-links { display: flex; flex-direction: column; gap: 1rem; }
+    .contact-link {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      text-decoration: none;
+      padding: 1.25rem 1.5rem;
+      background: #fff;
+      border: 1px solid var(--stone-200);
+      border-radius: 8px;
+      transition: border-color 0.25s, box-shadow 0.25s;
+    }
+    .contact-link:hover {
+      border-color: var(--accent);
+      box-shadow: 0 4px 16px rgba(37, 99, 235, 0.08);
+    }
+    .contact-link .icon-circle {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: var(--accent-subtle);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--accent);
+      flex-shrink: 0;
+    }
+    .contact-link .link-label {
+      font-size: 0.78rem;
+      font-family: var(--mono);
+      color: var(--stone-400);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+    .contact-link .link-value {
+      font-size: 0.95rem;
+      font-weight: 500;
+      color: var(--stone-800);
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 1px solid var(--stone-200);
+      padding: 2.5rem 2rem;
+      text-align: center;
+    }
+    footer p {
+      font-size: 0.82rem;
+      color: var(--stone-400);
+    }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .fade-in {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .hamburger { display: block; }
+      .nav-links.open {
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        top: 64px;
+        left: 0;
+        right: 0;
+        background: rgba(250,250,249,0.97);
+        backdrop-filter: blur(16px);
+        padding: 1.5rem 2rem;
+        gap: 1.25rem;
+        border-bottom: 1px solid var(--stone-200);
+      }
+      .about-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+      .exp-item { grid-template-columns: 1fr; gap: 0.75rem; }
+      .skills-grid { grid-template-columns: 1fr; }
+      .edu-grid { grid-template-columns: 1fr; }
+      .contact-content { grid-template-columns: 1fr; gap: 2.5rem; }
+      section { padding: 4rem 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav id="nav">
+    <div class="nav-inner">
+      <a href="#" class="nav-name">jonathan reding</a>
+      <div class="nav-links" id="navLinks">
+        <a href="#about">About</a>
+        <a href="#experience">Experience</a>
+        <a href="#skills">Skills</a>
+        <a href="#contact">Contact</a>
+      </div>
+      <button class="hamburger" id="hamburger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-inner">
+      <p class="hero-label">IT Leadership · AV/Media Tech · Project Management</p>
+      <h1>Jonathan Reding</h1>
+      <p class="hero-subtitle">IT Director and technical leader with a track record of building reliable infrastructure, leading cross-functional teams, and delivering technology solutions that serve real people.</p>
+      <a href="#contact" class="hero-cta">
+        Get in touch
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="section-label">About</div>
+    <h2 class="section-title">Building technology that works for people</h2>
+    <div class="divider"></div>
+    <div class="about-grid fade-in">
+      <div class="about-text">
+        <p>I'm an IT professional based in Colorado Springs with deep experience leading technology operations, AV/media systems, and infrastructure projects for organizations of all sizes.</p>
+        <p>Most recently I served as IT Director and Worship Tech Director at a 1,300-member organization with two campuses and 40–50 staff, where I managed everything from network infrastructure and endpoint security to live production and AV systems.</p>
+        <p>I'm driven by the belief that technology should be invisible when it's working right — reliable, secure, and in service of the people who depend on it every day.</p>
+      </div>
+      <div class="about-details">
+        <div class="detail-card">
+          <div class="label">Location</div>
+          <div class="value">Colorado Springs, CO</div>
+        </div>
+        <div class="detail-card">
+          <div class="label">Focus</div>
+          <div class="value">IT Leadership</div>
+        </div>
+        <div class="detail-card">
+          <div class="label">Work Style</div>
+          <div class="value">Remote / Hybrid</div>
+        </div>
+        <div class="detail-card">
+          <div class="label">Availability</div>
+          <div class="value">Open to Work</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EXPERIENCE -->
+  <section id="experience">
+    <div class="section-label">Experience</div>
+    <h2 class="section-title">Where I've made an impact</h2>
+    <div class="divider"></div>
+
+    <div class="exp-item fade-in">
+      <div class="exp-period">2021 – 2025</div>
+      <div>
+        <div class="exp-role">IT Director & Worship Tech Director</div>
+        <div class="exp-org">Academy Christian Church</div>
+        <div class="exp-desc">Led IT operations and AV/media production across two campuses supporting 1,300 members and 40–50 staff. Managed network infrastructure, endpoint deployment, cybersecurity practices, live broadcast production, and vendor relationships. Drove digital transformation initiatives while maintaining reliable, budget-conscious systems.</div>
+        <div class="exp-tags">
+          <span class="exp-tag">Infrastructure</span>
+          <span class="exp-tag">AV Production</span>
+          <span class="exp-tag">Team Leadership</span>
+          <span class="exp-tag">Cybersecurity</span>
+          <span class="exp-tag">Vendor Management</span>
+          <span class="exp-tag">Budget Planning</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section id="skills">
+    <div class="section-label">Skills & Expertise</div>
+    <h2 class="section-title">What I bring to the table</h2>
+    <div class="divider"></div>
+
+    <div class="skills-grid fade-in">
+      <div class="skill-card">
+        <div class="skill-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+        </div>
+        <h3>IT Infrastructure</h3>
+        <p>Network architecture, endpoint management, cloud services, virtualization, and systems administration across Windows and macOS environments.</p>
+      </div>
+      <div class="skill-card">
+        <div class="skill-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </div>
+        <h3>Cybersecurity</h3>
+        <p>Security policy development, endpoint protection, access management, disaster recovery planning, and compliance frameworks.</p>
+      </div>
+      <div class="skill-card">
+        <div class="skill-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg>
+        </div>
+        <h3>AV & Media Production</h3>
+        <p>Live broadcast systems, sound reinforcement, video production, lighting design, and worship technology integration.</p>
+      </div>
+      <div class="skill-card">
+        <div class="skill-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        </div>
+        <h3>Technical Leadership</h3>
+        <p>Cross-functional team management, technical mentoring, stakeholder communication, and bridging the gap between technical and non-technical teams.</p>
+      </div>
+      <div class="skill-card">
+        <div class="skill-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+        </div>
+        <h3>Project Management</h3>
+        <p>Technology roadmap planning, project scoping, timeline management, budgeting, and vendor evaluation for infrastructure and AV projects.</p>
+      </div>
+      <div class="skill-card">
+        <div class="skill-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+        </div>
+        <h3>Smart Systems & Automation</h3>
+        <p>Home and facility automation, IoT integration, networking (UniFi), smart lighting control systems (Lutron), and monitoring solutions.</p>
+      </div>
+    </div>
+
+    <!-- CERTIFICATIONS -->
+    <div style="margin-top: 4rem;" class="fade-in">
+      <div class="section-label">Certifications</div>
+      <div class="certs-row">
+        <div class="cert-badge"><span class="dot"></span>CompTIA A+</div>
+        <div class="cert-badge"><span class="dot"></span>CompTIA Network+</div>
+        <div class="cert-badge"><span class="dot"></span>MCITP (Microsoft)</div>
+        <div class="cert-badge"><span class="dot"></span>MCTS (Microsoft)</div>
+      </div>
+    </div>
+
+    <!-- EDUCATION -->
+    <div style="margin-top: 4rem;" class="fade-in">
+      <div class="section-label">Education</div>
+      <div class="edu-grid">
+        <div class="edu-card">
+          <div class="edu-degree">M.S. Information Systems</div>
+          <div class="edu-school">University of Phoenix</div>
+        </div>
+        <div class="edu-card">
+          <div class="edu-degree">B.S. Christian Ministry</div>
+          <div class="edu-school">Abilene Christian University</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="section-label">Contact</div>
+    <h2 class="section-title">Let's connect</h2>
+    <div class="divider"></div>
+    <div class="contact-content fade-in">
+      <div class="contact-text">
+        <p>I'm currently exploring new opportunities in IT support, AV/media technology, and technical project management — ideally remote-friendly roles where I can bring my experience leading teams and building reliable systems.</p>
+        <p>Whether you have an opportunity, a question, or just want to say hello, I'd love to hear from you.</p>
+      </div>
+      <div class="contact-links">
+        <a href="mailto:jonathan@jonathanreding.com" class="contact-link">
+          <div class="icon-circle">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+          </div>
+          <div>
+            <div class="link-label">Email</div>
+            <div class="link-value">jonathan@jonathanreding.com</div>
+          </div>
+        </a>
+        <a href="https://www.linkedin.com/in/jonathanreding" target="_blank" rel="noopener" class="contact-link">
+          <div class="icon-circle">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+          </div>
+          <div>
+            <div class="link-label">LinkedIn</div>
+            <div class="link-value">linkedin.com/in/jonathanreding</div>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>&copy; 2026 Jonathan Reding. All rights reserved.</p>
+  </footer>
+
+  <script>
+    // Nav scroll effect
+    window.addEventListener('scroll', () => {
+      document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 20);
+    });
+
+    // Mobile menu
+    document.getElementById('hamburger').addEventListener('click', () => {
+      document.getElementById('navLinks').classList.toggle('open');
+    });
+
+    // Close mobile menu on link click
+    document.querySelectorAll('.nav-links a').forEach(a => {
+      a.addEventListener('click', () => {
+        document.getElementById('navLinks').classList.remove('open');
+      });
+    });
+
+    // Fade-in on scroll
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.15 });
+    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+  </script>
+
+</body>
+</html>
